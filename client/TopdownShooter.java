@@ -97,7 +97,7 @@ public class TopdownShooter {
     }
 
     private void update(float delta_time) {
-        if (frameLoopIndex > 60) {
+        if (frameLoopIndex > 20) {
             frameLoopIndex = 0;
             client.updateLocations();
             client.sendProtocol();
