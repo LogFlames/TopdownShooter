@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
+import java.awt.geom.AffineTransform;
 
 public class Player extends Creature {
     public static Player instance;
@@ -14,12 +15,20 @@ public class Player extends Creature {
 
     public Player() {
         instance = this;
+        rotation = 0f;
     }
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.RED);
-        g.fillRect((int)x, (int)y, 100, 100);
+        Graphics2D g2d = (Graphics2D)g;
+
+        AffineTransform old = g2d.getTransform();
+        g2d.rotate(Math.toRadians(rotation));
+
+        g2d.setColor(Color.RED);
+        g2d.fillRect((int)x, (int)y, 30, 20);
+
+        g2d.setTransform(old);
     }
 
     @Override

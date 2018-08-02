@@ -1,14 +1,14 @@
 // TopdownShooter.java
 
-import java.util.*;
 import java.io.*;
-import javax.swing.*;
+import java.util.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
+import javax.swing.*;
 import javax.imageio.ImageIO;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 
 public class TopdownShooter {
@@ -75,6 +75,10 @@ public class TopdownShooter {
         frameLoopIndex = 0;
 
         gameLoop();
+    }
+
+    public void exit() {
+        client.closeConnection();
     }
 
     private void gameLoop() {

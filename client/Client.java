@@ -70,10 +70,11 @@ public class Client {
     }
 
     public void sendProtocol() {
-        String message = String.format("GUpos_x:%f;pos_y:%f;shoot:False;health:%d;vel_x:%f;vel_y:%f;rot:90;",
+        String message = String.format("GUpos_x:%f;pos_y:%f;shoot:False;health:%d;vel_x:%f;vel_y:%f;rot:%f;",
                                        Player.instance.x, Player.instance.y,
                                        Player.instance.health,
-                                       Player.instance.vel_x, Player.instance.vel_y);
+                                       Player.instance.vel_x, Player.instance.vel_y,
+                                       Player.instance.rotation);
         SendData(message);
     }
 
@@ -89,6 +90,7 @@ public class Client {
             output.close();
             input.close();
             socket.close();
+            System.out.println("Closed connection!");
         } catch (IOException e) {
             e.printStackTrace();
         }
