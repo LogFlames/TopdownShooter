@@ -3,8 +3,8 @@ class ClientClass:
 	def __init__(self, clientID, connection, addr):
 		self.clientID = clientID
 
-		self.x = 0
-		self.y = 0
+		self.pos_x = 0
+		self.pos_y = 0
 		self.vel_x = 0
 		self.vel_y = 0
 

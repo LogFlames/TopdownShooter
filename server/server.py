@@ -50,16 +50,18 @@ while True:
 	try:
 		s, addr = serverSocket.accept()
 	except:
-		s = None
+		s = False
 	
-	if s != None:
+	if s:
 		connections.append([ClientClass(clientID, s, addr), True])
+		s.send(('?' + str(clientID) + '#\n').encode('utf-8'))
 		clientID += 1
 		
-		s.settimeout(0.3)
+		s.settimeout(0.5)
 		s.setblocking(0)
 
 		print('Incoming connection from {}'.format(addr))
+		print(connections)
 
 	index = 0
 
@@ -67,6 +69,8 @@ while True:
 		try:
 			incoming = Client.clientSocket.recv(4096)
 			connections = parseClientInput(index, incoming, connections)
+			if connections == None:
+				connections = []
 
 			print('From {}: {}'.format(Client.addr, incoming))
 		except:
@@ -79,14 +83,14 @@ while True:
 		for n in range(len(connections) -1, -1, -1):
 
 			if not connections[n][1]:
-				connections[n][0].sendToClient(':kicked:')
+				connections[n][0].sendToClient('kicked#')
 				connections[n][0].clientSocket.close()
 				print('{} failed to answer the heartbeat and was kicked from the server'.format(connections[n][0].addr))
 				del connections[n]
 
 			else:
 				connections[n][1] = False
-				connections[n][0].sendToClient(':hb:')
+				connections[n][0].sendToClient('hb#')
 		last_hearbeat = time.time()
 
 serverSocket.close()
