@@ -39,13 +39,15 @@ connections = []
 clientID = 1
 
 serverSocket.listen(5)
-serverSocket.settimeout(0.05)
+serverSocket.settimeout(0.07)
 
 heartbeat_time = 3
 
 last_hearbeat = time.time()
 
 while True:
+
+	broadcastGameUpdate(connections)
 
 	try:
 		s, addr = serverSocket.accept()
@@ -57,7 +59,7 @@ while True:
 		s.send(('?' + str(clientID) + '#\n').encode('utf-8'))
 		clientID += 1
 		
-		s.settimeout(0.5)
+		s.settimeout(0.3)
 		s.setblocking(0)
 
 		print('Incoming connection from {}'.format(addr))
@@ -66,13 +68,26 @@ while True:
 	index = 0
 
 	for Client, hbt in connections:
+
+		if Client.clientSocket == None or Client.clientSocket.fileno() == -1:
+			continue
+
 		try:
 			incoming = Client.clientSocket.recv(4096)
+
+			if len(incoming) == 0:
+				print('Kicked {} from the server!'.format(Client.addr))
+				Client.clientSocket.close()
+				connections.remove([Client, hbt])
+
+			incoming = incoming.strip()
+
 			connections = parseClientInput(index, incoming, connections)
 			if connections == None:
 				connections = []
 
-			print('From {}: {}'.format(Client.addr, incoming))
+			if incoming:
+				print('From {}: {}'.format(Client.addr, incoming))
 		except:
 			pass
 

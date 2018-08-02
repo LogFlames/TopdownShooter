@@ -6,4 +6,4 @@ GUpos_x:64;pos_y:64;shoot:False;health:100;vel_x:0;vel_y:20;rot:90;#
 
 Server:
 
-GUpos_x:64;pos_y:64;health:100;vel_x:5;vel_y:5;rot:0;shoot=False#pos_x:0;pos_y:0;health:20;vel_x:10;vel_y:10;rot:90;shoot=True;
+GUidentifier:1;pos_x:64;pos_y:64;health:100;vel_x:5;vel_y:5;rot:0;shoot=False#identifier:2;pos_x:0;pos_y:0;health:20;vel_x:10;vel_y:10;rot:90;shoot=True;
