@@ -1,14 +1,14 @@
 // TopdownShooter.java
 
-import java.util.*;
 import java.io.*;
-import javax.swing.*;
+import java.util.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
+import javax.swing.*;
 import javax.imageio.ImageIO;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 
 public class TopdownShooter {
@@ -27,6 +27,10 @@ public class TopdownShooter {
     private EntityManager entityManager;
 
     public InputData inputData;
+
+    private Client client;
+
+    private int frameLoopIndex;
     
     public static void main(String[] agrs) {
         instance = new TopdownShooter();
@@ -59,18 +63,22 @@ public class TopdownShooter {
         };
 
         panel.setFocusable(true);
-
         frame.add(panel);
-
         addKeyBindings(panel);
 
         frame.setVisible(true);
 
         entityManager = new EntityManager(new Player());
-
+        client = new Client();
         inputData = new InputData();
 
+        frameLoopIndex = 0;
+
         gameLoop();
+    }
+
+    public void exit() {
+        client.closeConnection();
     }
 
     private void gameLoop() {
@@ -93,11 +101,19 @@ public class TopdownShooter {
     }
 
     private void update(float delta_time) {
+        if (frameLoopIndex > 20) {
+            frameLoopIndex = 0;
+            client.updateLocations();
+            client.sendProtocol();
+        }
         entityManager.update(delta_time);
+        frameLoopIndex++;
     }
 
     private void draw(Graphics g) {
-        entityManager.draw(g);
+        if (entityManager != null) {
+            entityManager.draw(g);
+        }
     }
 
     private void addKeyBindings(JComponent jc) {
@@ -108,6 +124,7 @@ public class TopdownShooter {
                               @Override
                               public void actionPerformed(ActionEvent ae) {
                                   inputData.right = true;
+                                  inputData.lastHori = "right";
                               }
                           });
         jc.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_D, 0, true), "D released");
@@ -116,6 +133,9 @@ public class TopdownShooter {
                               @Override
                               public void actionPerformed(ActionEvent ae) {
                                   inputData.right = false;
+                                  if (inputData.lastHori == "right") {
+                                      inputData.lastHori = "";
+                                  }
                               }
                           });
 
@@ -126,6 +146,7 @@ public class TopdownShooter {
                               @Override
                               public void actionPerformed(ActionEvent ae) {
                                   inputData.left = true;
+                                  inputData.lastHori = "left";
                               }
                           });
         jc.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_A, 0, true), "A released");
@@ -134,6 +155,9 @@ public class TopdownShooter {
                               @Override
                               public void actionPerformed(ActionEvent ae) {
                                   inputData.left = false;
+                                  if (inputData.lastHori == "left") {
+                                      inputData.lastHori = "";
+                                  }
                               }
                           });
 
@@ -144,6 +168,7 @@ public class TopdownShooter {
                               @Override
                               public void actionPerformed(ActionEvent ae) {
                                   inputData.forward = true;
+                                  inputData.lastVert = "forward";
                               }
                           });
         jc.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_W, 0, true), "W released");
@@ -152,6 +177,9 @@ public class TopdownShooter {
                               @Override
                               public void actionPerformed(ActionEvent ae) {
                                   inputData.forward = false;
+                                  if (inputData.lastVert == "forward") {
+                                      inputData.lastVert = "";
+                                  }
                               }
                           });
 
@@ -162,6 +190,7 @@ public class TopdownShooter {
                               @Override
                               public void actionPerformed(ActionEvent ae) {
                                   inputData.backwards = true;
+                                  inputData.lastVert = "backwards";
                               }
                           });
         jc.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_S, 0, true), "S released");
@@ -170,6 +199,9 @@ public class TopdownShooter {
                               @Override
                               public void actionPerformed(ActionEvent ae) {
                                   inputData.backwards = false;
+                                  if (inputData.lastVert == "backwards") {
+                                      inputData.lastVert = "";
+                                  }
                               }
                           });
     }
@@ -180,5 +212,7 @@ public class TopdownShooter {
         public boolean left;
         public boolean right;
 
+        public String lastVert = "";
+        public String lastHori = "";
     }
 }

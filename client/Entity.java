@@ -11,6 +11,8 @@ public abstract class Entity {
     protected float x;
     protected float y;
 
+    protected float rotation;
+
     protected abstract void draw(Graphics g);
     protected abstract void update(float delta_time);
 }
