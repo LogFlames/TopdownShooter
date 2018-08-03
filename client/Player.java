@@ -13,6 +13,9 @@ public class Player extends Creature {
     private float speed = 30;
     public int id;
 
+    public float shootRotation;
+    public boolean shootThisFrame;
+
     public Player() {
         instance = this;
         rotation = 0f;
@@ -85,5 +88,12 @@ public class Player extends Creature {
             rotation = 359;
         }
         rotation %= 360;
+
+        if (TopdownShooter.instance.inputData.shoot) {
+            TopdownShooter.instance.inputData.shoot = false;
+
+            shootRotation = rotation;
+            shootThisFrame = true;
+        }
     }
 }

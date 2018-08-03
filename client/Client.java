@@ -39,8 +39,10 @@ public class Client {
             if (input.ready()) {
                 String line;
                 while ((line = input.readLine()) != null) {
-                    //System.out.print("From server -->: ");
-                    //System.out.println(line);
+                    if (TopdownShooter.debug) {
+                        System.out.print("From server -->: ");
+                        System.out.println(line);
+                    }
                     line = line.trim();
                     if (line.indexOf("#") <= -1) {
                         line += "#";
@@ -84,6 +86,7 @@ public class Client {
 
     public void ParseGameUpdate(String gameUpdate) {
         PositionData pos_data = new PositionData();
+        boolean createdBullet = false;
 
         // Shouldn't run, ParseGameUpdate should get called multiple times instead
         String[] entities = gameUpdate.split("#");
@@ -119,7 +122,10 @@ public class Client {
                         pos_data.rotation = PositionData.tryParseFloat(value);
                         break;
                     case "shoot":
-                        // No shooting implemented yet
+                        if (!"False".equals(value)) {
+                            pos_data.bulletRotation = PositionData.tryParseFloat(value) % 360;
+                            createdBullet = true;
+                        }
                         break;
                     default:
                         System.out.println(String.format("Can't handle gameUpdateKey: %s", attr)); 
@@ -128,13 +134,30 @@ public class Client {
             }
         }
 
+        if (createdBullet) {
+            ParseBullet(pos_data);
+        }
+
         EntityManager.instance.updateEntities(pos_data.id, pos_data);
     }
 
+    public void ParseBullet(PositionData data) {
+        int x = data.pos_x;
+        int y = data.pos_y;
+        float rot = data.bulletRotation;
+
+        BulletManager.instance.addBullet(new Bullet(x, y, rot));
+    }
+
     public void sendProtocol() {
-        String message = String.format("GUpos_x:%d;pos_y:%d;shoot:False;health:%d;vel_x:%f;vel_y:%f;rot:%f;",
+        String shootPart = "False";
+        if (Player.instance.shootThisFrame) {
+            shootPart = Float.toString(Player.instance.shootRotation);
+            Player.instance.shootThisFrame = false;
+        }
+        String message = String.format("GUpos_x:%d;pos_y:%d;shoot:%s;health:%d;vel_x:%f;vel_y:%f;rot:%f;",
                                        (int)Player.instance.x, (int)Player.instance.y,
-                                       Player.instance.health,
+                                       shootPart, Player.instance.health,
                                        Player.instance.vel_x, Player.instance.vel_y,
                                        Player.instance.rotation);
         SendData(message);
@@ -143,8 +166,10 @@ public class Client {
     public void SendData(String data) {
         if (data != null && data != "") {
             output.println(data + "#");
-            //System.out.print("To server -->: ");
-            //System.out.println(data + "#");
+            if (TopdownShooter.debug) {
+                System.out.print("To server -->: ");
+                System.out.println(data + "#");
+            }
         }
     }
 

@@ -32,15 +32,25 @@ public class TopdownShooter {
     private boolean running;
 
     private EntityManager entityManager;
+    private BulletManager bulletManager;
 
     public InputData inputData;
 
     private Client client;
 
     private int frameLoopIndex;
+
+    public static boolean debug;
   
-    public static void main(String[] agrs) {
+    public static void main(String[] args) {
         instance = new TopdownShooter();
+        if (args.length > 0) {
+            for (String arg : args) {
+                if ("debug".equals(arg)) {
+                    debug = true;
+                }
+            }
+        }
         instance.init();
     }
 
@@ -84,6 +94,7 @@ public class TopdownShooter {
         frame.setVisible(true);
 
         entityManager = new EntityManager(new Player());
+        bulletManager = new BulletManager();
         client = new Client();
         inputData = new InputData();
 
@@ -130,11 +141,15 @@ public class TopdownShooter {
             client.updateLocations();
             client.sendProtocol();
         }
+        bulletManager.update(delta_time);
         entityManager.update(delta_time);
         frameLoopIndex++;
     }
 
     private void draw(Graphics g) {
+        if (bulletManager != null) {
+            bulletManager.draw(g);
+        }
         if (entityManager != null) {
             entityManager.draw(g);
         }
@@ -228,6 +243,15 @@ public class TopdownShooter {
                                   }
                               }
                           });
+
+        jc.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0, false), "Space pressed");
+
+        jc.getActionMap().put("Space pressed", new AbstractAction() {
+                              @Override
+                              public void actionPerformed(ActionEvent ae) {
+                                  inputData.shoot = true;
+                              }
+                          });
     }
 
     public class MM implements MouseListener {
@@ -265,5 +289,7 @@ public class TopdownShooter {
 
         public String lastVert = "";
         public String lastHori = "";
+
+        public boolean shoot;
     }
 }

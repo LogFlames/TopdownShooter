@@ -2,13 +2,15 @@ import java.util.*;
 import java.io.*;
 
 public class PositionData {
-    public float pos_x;
-    public float pos_y;
+    public int pos_x;
+    public int pos_y;
     public float vel_x;
     public float vel_y;
 
     public float rotation;
     public int health;
+
+    public float bulletRotation;
 
     public int id;
 
