@@ -48,6 +48,7 @@ public class TopdownShooter {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setUndecorated(true);
         frame.setSize(width, height);
+//        frame.setSize(600, 600);
         frame.setTitle("Multiplayer TopdownShooter");
         frame.setResizable(false);
         frame.setFocusable(false);
@@ -101,7 +102,7 @@ public class TopdownShooter {
     }
 
     private void update(float delta_time) {
-        if (frameLoopIndex > 5) {
+        if (frameLoopIndex > 3) {
             frameLoopIndex = 0;
             client.updateLocations();
             client.sendProtocol();

@@ -85,6 +85,7 @@ public class Client {
                 String[] splited = headers.split(":");
                 String attr = splited[0];
                 String value = splited[1];
+                value = value.replace(",", ".");
 
                 switch (attr) {
                     case "identifier":
