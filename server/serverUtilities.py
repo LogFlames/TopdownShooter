@@ -37,11 +37,11 @@ def parseClientInput(clientIndex, msg, conn):
 
 def broadcastGameUpdate(conn):
 
-	gu = 'GU'
+	gu = ''
 
 	# First, we must get every active instance of the Client class stored in connections
 	for c in conn:
-		gu += 'identifier:{};pos_x:{};pos_y:{};health:{};vel_x:{};vel_y:{};rot:{};shoot:{}#'.format(
+		gu += 'GUidentifier:{};pos_x:{};pos_y:{};health:{};vel_x:{};vel_y:{};rot:{};shoot:{}#'.format(
 			c[0].clientID, c[0].pos_x, c[0].pos_y, c[0].health, c[0].vel_x, c[0].vel_y, c[0].rotation, c[0].shoot
 		)
 
