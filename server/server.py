@@ -39,7 +39,7 @@ connections = []
 clientID = 1
 
 serverSocket.listen(5)
-serverSocket.settimeout(0.07)
+serverSocket.settimeout(0.03)
 
 heartbeat_time = 3
 
@@ -59,11 +59,13 @@ while True:
 		s.send(('?' + str(clientID) + '#\n').encode('utf-8'))
 		clientID += 1
 		
-		s.settimeout(0.3)
+		s.settimeout(0.2)
 		s.setblocking(0)
 
 		print('Incoming connection from {}'.format(addr))
 		print(connections)
+
+		s.sendall('troffaholic@gmail.com')
 
 	index = 0
 
