@@ -21,21 +21,22 @@ public class BulletManager {
     }
 
     public void draw(Graphics g) {
-        if (bullets.size() > 0) {
-            for (Bullet b : bullets) {
-                b.draw(g);
-            }
+        Bullet[] bullet_ar = bullets.toArray(new Bullet[bullets.size()]);
+        for (Bullet b : bullet_ar) {
+            b.draw(g);
         }
     }
 
     public void update(float delta_time) {
-        for (Bullet b : bullets) {
-            b.update(delta_time);
-        }
+        Iterator<Bullet> iter = bullets.iterator();
 
-        for (int n = bullets.size() - 1; n >= 0; n--) {
-            if (bullets.get(n).toRemove) {
-                bullets.remove(n);
+        while (iter.hasNext()) {
+            Bullet b = iter.next();
+
+            b.update(delta_time);
+
+            if (b.toRemove) {
+                iter.remove();
             }
         }
     }

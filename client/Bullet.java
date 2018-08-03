@@ -14,7 +14,7 @@ public class Bullet {
     private float x;
     private float y;
     private float rotation;
-    private float speed = 40f;
+    private float speed = 500f;
 
     public boolean toRemove;
 

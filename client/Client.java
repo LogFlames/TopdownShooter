@@ -142,8 +142,8 @@ public class Client {
     }
 
     public void ParseBullet(PositionData data) {
-        int x = data.pos_x;
-        int y = data.pos_y;
+        int x = data.pos_x + 23;
+        int y = data.pos_y + 23;
         float rot = data.bulletRotation;
 
         BulletManager.instance.addBullet(new Bullet(x, y, rot));
@@ -152,7 +152,7 @@ public class Client {
     public void sendProtocol() {
         String shootPart = "False";
         if (Player.instance.shootThisFrame) {
-            shootPart = Float.toString(Player.instance.shootRotation);
+            shootPart = Float.toString(Player.instance.shootRotation + 90f);
             Player.instance.shootThisFrame = false;
         }
         String message = String.format("GUpos_x:%d;pos_y:%d;shoot:%s;health:%d;vel_x:%f;vel_y:%f;rot:%f;",
