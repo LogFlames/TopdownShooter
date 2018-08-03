@@ -34,7 +34,7 @@ public class Bullet {
 
         g2d.setColor(drawingColor);
         g2d.fill(new Ellipse2D.Double(x * TopdownShooter.instance.scaleX, y * TopdownShooter.instance.scaleY,
-                                      6 * TopdownShooter.instance.scaleX, 6 * TopdownShooter.instance.scaleY));
+                                      10 * TopdownShooter.instance.scaleX, 10 * TopdownShooter.instance.scaleY));
     }
 
     public void update(float delta_time) {
