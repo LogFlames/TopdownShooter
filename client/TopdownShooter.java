@@ -5,6 +5,7 @@ import java.util.*;
 import java.awt.*;
 import javax.swing.*;
 import javax.imageio.ImageIO;
+import java.awt.event.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.ActionEvent;
@@ -21,6 +22,9 @@ public class TopdownShooter {
 
     public int width;
     public int height;
+
+    public float mouseX;
+    public float mouseY;
 
     private boolean running;
 
@@ -45,14 +49,21 @@ public class TopdownShooter {
         height = (int)screenSize.getHeight();
 
         frame = new JFrame(gc);
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setUndecorated(true);
-        frame.setSize(width, height);
-//        frame.setSize(1440, 900);
+//        frame.setSize(width, height);
+        frame.setSize(1440, 900);
         frame.setTitle("Multiplayer TopdownShooter");
         frame.setResizable(false);
         frame.setFocusable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+        try {
+            gd.setFullScreenWindow(frame);
+        } catch (Exception e) {
+            System.out.println("Couldn't set fullscreen.");
+        }
 
         panel = new JPanel() {
             @Override
@@ -102,6 +113,10 @@ public class TopdownShooter {
     }
 
     private void update(float delta_time) {
+        Point mousePoint = MouseInfo.getPointerInfo().getLocation();
+        mouseX = mousePoint.x;
+        mouseY = mousePoint.y;
+        
         if (frameLoopIndex > 1) {
             frameLoopIndex = 0;
             client.updateLocations();
@@ -205,6 +220,33 @@ public class TopdownShooter {
                                   }
                               }
                           });
+    }
+
+    public class MM implements MouseListener {
+        @Override
+        public void mouseClicked(MouseEvent me) {
+
+        }
+
+        @Override
+        public void mousePressed(MouseEvent me) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent me) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent me) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent me) {
+
+        }
     }
 
     public class InputData {

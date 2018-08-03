@@ -19,7 +19,8 @@ public class Client {
         while (socket == null) {
             port++;
             try {
-                socket = new Socket("172.16.1.140", port);
+                //socket = new Socket("172.16.1.140", port);
+                socket = new Socket("94.245.5.48", 8192);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -38,8 +39,8 @@ public class Client {
             if (input.ready()) {
                 String line;
                 while ((line = input.readLine()) != null) {
-                    System.out.print("From server -->: ");
-                    System.out.println(line);
+                    //System.out.print("From server -->: ");
+                    //System.out.println(line);
                     line = line.trim();
                     if (line.indexOf("#") <= -1) {
                         line += "#";
@@ -142,8 +143,8 @@ public class Client {
     public void SendData(String data) {
         if (data != null && data != "") {
             output.println(data + "#");
-            System.out.print("To server -->: ");
-            System.out.println(data + "#");
+            //System.out.print("To server -->: ");
+            //System.out.println(data + "#");
         }
     }
 

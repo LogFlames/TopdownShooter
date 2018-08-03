@@ -24,10 +24,18 @@ public class Player extends Creature {
         Graphics2D g2d = (Graphics2D)g;
 
         AffineTransform old = g2d.getTransform();
+        g2d.translate(x + 23, y + 23);
         g2d.rotate(Math.toRadians(rotation));
 
+        g2d.setColor(Color.BLACK);
+
+        // thin
+        g2d.fillRect(-6, 20, 12, 24);
+        // thick
+        g2d.fillRoundRect(-9, 36, 18, 10, 4, 4);
+
         g2d.setColor(Color.RED);
-        g2d.fillRect((int)x, (int)y, 35, 35);
+        g2d.fillRoundRect(-23, -23, 46, 46, 12, 12);
 
         g2d.setTransform(old);
     }
@@ -52,9 +60,27 @@ public class Player extends Creature {
             toMoveX = 1;
         }
 
+        if (toMoveX != 0 && toMoveY != 0) {
+            toMoveX *= 0.707;
+            toMoveY *= 0.707;
+        }
+
         vel_x += toMoveX * speed;
         vel_y += toMoveY * speed;
 
         move(delta_time, true);
+
+        float del_x = TopdownShooter.instance.mouseX - (x + 23);
+        float del_y = TopdownShooter.instance.mouseY - (y + 23);
+
+        if (del_x < 0) {
+            rotation = (float)Math.toDegrees(Math.atan2(Math.abs(del_x), del_y));
+        } else {
+            rotation = 360f - (float)Math.toDegrees(Math.atan2(del_x, del_y));
+        }
+        if (rotation < 0) {
+            rotation = 359;
+        }
+        rotation %= 360;
     }
 }
