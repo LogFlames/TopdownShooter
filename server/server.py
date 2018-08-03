@@ -63,9 +63,6 @@ while True:
 		s.setblocking(0)
 
 		print('Incoming connection from {}'.format(addr))
-		print(connections)
-
-		s.sendall('troffaholic@gmail.com')
 
 	index = 0
 
@@ -88,8 +85,8 @@ while True:
 			if connections == None:
 				connections = []
 
-			if incoming:
-				print('From {}: {}'.format(Client.addr, incoming))
+			# if incoming:
+				# print('From {}: {}'.format(Client.addr, incoming))
 		except:
 			pass
 
