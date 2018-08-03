@@ -87,8 +87,8 @@ public class TopdownShooter {
         client = new Client();
         inputData = new InputData();
 
-        scaleX = width / 1440;
-        scaleY = height / 900;
+        scaleX = width / 1440f;
+        scaleY = height / 900f;
 
         System.out.println("width: " + width + " ,height: " + height + " ,scaleX: " + scaleX + " ,scaleY: " + scaleY);
 
