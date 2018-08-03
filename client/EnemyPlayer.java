@@ -26,6 +26,6 @@ public class EnemyPlayer extends Creature {
 
     @Override
     public void update(float delta_time) {
-        move(delta_time, false);
+        move(delta_time, true);
     }
 }
