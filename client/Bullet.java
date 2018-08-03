@@ -33,7 +33,8 @@ public class Bullet {
         Graphics2D g2d = (Graphics2D)g;
 
         g2d.setColor(drawingColor);
-        g2d.fill(new Ellipse2D.Double(x, y, 6, 6));
+        g2d.fill(new Ellipse2D.Double(x * TopdownShooter.instance.scaleX, y * TopdownShooter.instance.scaleY,
+                                      6 * TopdownShooter.instance.scaleX, 6 * TopdownShooter.instance.scaleY));
     }
 
     public void update(float delta_time) {
