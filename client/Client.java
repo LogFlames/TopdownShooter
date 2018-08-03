@@ -3,6 +3,7 @@
 import java.util.*;
 import java.io.*;
 import java.net.*;
+import java.awt.*;
 
 public class Client {
 
@@ -146,7 +147,14 @@ public class Client {
         int y = data.pos_y + 23;
         float rot = data.bulletRotation;
 
-        BulletManager.instance.addBullet(new Bullet(x, y, rot));
+        Color c;
+        if (data.id == Player.instance.id) {
+            c = Color.RED;
+        } else {
+            c = Color.BLACK;
+        }
+
+        BulletManager.instance.addBullet(new Bullet(x, y, rot, c));
     }
 
     public void sendProtocol() {

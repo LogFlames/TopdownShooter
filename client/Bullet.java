@@ -20,13 +20,17 @@ public class Bullet {
 
     private Color drawingColor;
 
-    public Bullet(float startX, float startY, float rotation) {
+    public Bullet(float startX, float startY, float rotation, Color c) {
         x = startX;
         y = startY;
         this.rotation = rotation;
         toRemove = false;
 
-        drawingColor = Color.BLACK;
+        if (c == null) {
+            drawingColor = Color.BLACK;
+        } else {
+            drawingColor = c;
+        }
     }
 
     public void draw(Graphics g) {

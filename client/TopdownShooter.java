@@ -113,7 +113,7 @@ public class TopdownShooter {
     }
 
     private void gameLoop() {
-        int targetFrameRate = 90;
+        int targetFrameRate = 120;
 
         long nanosPerFrame = (long) 1e9 / targetFrameRate;
 
