@@ -29,9 +29,7 @@ public class Player extends Creature {
 
         g2d.setColor(Color.BLACK);
 
-        // thin
         g2d.fillRect(-6, 20, 12, 24);
-        // thick
         g2d.fillRoundRect(-9, 36, 18, 10, 4, 4);
 
         g2d.setColor(Color.RED);
