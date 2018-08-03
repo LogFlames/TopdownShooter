@@ -152,7 +152,7 @@ public class Client {
     public void sendProtocol() {
         String shootPart = "False";
         if (Player.instance.shootThisFrame) {
-            shootPart = Float.toString(Player.instance.shootRotation + 90f);
+            shootPart = Float.toString((Player.instance.shootRotation + 90f) % 360f);
             Player.instance.shootThisFrame = false;
         }
         String message = String.format("GUpos_x:%d;pos_y:%d;shoot:%s;health:%d;vel_x:%f;vel_y:%f;rot:%f;",
