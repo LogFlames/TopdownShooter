@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.AffineTransform;
 
 public class EnemyPlayer extends Creature {
 
@@ -20,8 +21,23 @@ public class EnemyPlayer extends Creature {
 
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.BLUE);
-        g.fillRect((int)x, (int)y, 46, 46);
+        Graphics2D g2d = (Graphics2D)g;
+
+        AffineTransform old = g2d.getTransform();
+        g2d.translate(x + 23, y + 23);
+        g2d.rotate(Math.toRadians(rotation));
+
+        g2d.setColor(Color.BLACK);
+
+        // thin
+        g2d.fillRect(-6, 20, 12, 24);
+        // thick
+        g2d.fillRoundRect(-9, 36, 18, 10, 4, 4);
+
+        g2d.setColor(Color.BLUE);
+        g2d.fillRoundRect(-23, -23, 46, 46, 12, 12);
+
+        g2d.setTransform(old);
     }
 
     @Override
