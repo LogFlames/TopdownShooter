@@ -19,7 +19,7 @@ public class Client {
         while (socket == null) {
             port++;
             try {
-                socket = new Socket("172.16.1.138", port);
+                socket = new Socket("172.16.1.140", port);
             } catch (IOException e) {
                 e.printStackTrace();
             }
