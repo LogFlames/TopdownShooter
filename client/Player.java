@@ -10,7 +10,7 @@ import java.awt.geom.AffineTransform;
 
 public class Player extends Creature {
     public static Player instance;
-    private float speed = 40;
+    private float speed = 30;
     public int id;
 
     public Player() {
@@ -27,7 +27,7 @@ public class Player extends Creature {
         g2d.rotate(Math.toRadians(rotation));
 
         g2d.setColor(Color.RED);
-        g2d.fillRect((int)x, (int)y, 30, 30);
+        g2d.fillRect((int)x, (int)y, 40, 40);
 
         g2d.setTransform(old);
     }

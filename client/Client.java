@@ -38,6 +38,8 @@ public class Client {
             if (input.ready()) {
                 String line;
                 while ((line = input.readLine()) != null) {
+                    System.out.print("From server -->: ");
+                    System.out.println(line);
                     line = line.trim();
                     if (line.indexOf("#") <= -1) {
                         line += "#";
@@ -65,7 +67,7 @@ public class Client {
                             ParseGameUpdate(part.replace("GU", ""));
                         }
                         if (!parsed) {
-                            System.out.print("From server -->: ");
+                            System.out.print("(Not parsed) From server -->: ");
                             System.out.println(line);
                         }
                     }
@@ -140,6 +142,8 @@ public class Client {
     public void SendData(String data) {
         if (data != null && data != "") {
             output.println(data + "#");
+            System.out.print("To server -->: ");
+            System.out.println(data + "#");
         }
     }
 

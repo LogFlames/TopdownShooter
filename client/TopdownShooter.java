@@ -19,8 +19,8 @@ public class TopdownShooter {
     private JPanel panel;
     private static GraphicsConfiguration gc;
 
-    private int width;
-    private int height;
+    public int width;
+    public int height;
 
     private boolean running;
 
@@ -47,8 +47,8 @@ public class TopdownShooter {
         frame = new JFrame(gc);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setUndecorated(true);
-        frame.setSize(width, height);
-//        frame.setSize(600, 600);
+//        frame.setSize(width, height);
+        frame.setSize(1440, 900);
         frame.setTitle("Multiplayer TopdownShooter");
         frame.setResizable(false);
         frame.setFocusable(false);
@@ -83,7 +83,7 @@ public class TopdownShooter {
     }
 
     private void gameLoop() {
-        int targetFrameRate = 60;
+        int targetFrameRate = 120;
 
         long nanosPerFrame = (long) 1e9 / targetFrameRate;
 
