@@ -26,6 +26,9 @@ public class TopdownShooter {
     public float mouseX;
     public float mouseY;
 
+    public float scaleX;
+    public float scaleY;
+
     private boolean running;
 
     private EntityManager entityManager;
@@ -83,6 +86,9 @@ public class TopdownShooter {
         entityManager = new EntityManager(new Player());
         client = new Client();
         inputData = new InputData();
+
+        scaleX = width / 1440;
+        scaleY = height / 900;
 
         frameLoopIndex = 0;
 

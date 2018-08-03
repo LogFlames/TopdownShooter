@@ -24,16 +24,21 @@ public class Player extends Creature {
         Graphics2D g2d = (Graphics2D)g;
 
         AffineTransform old = g2d.getTransform();
-        g2d.translate(x + 23, y + 23);
+        g2d.translate((x + 23) * TopdownShooter.instance.scaleX, (y + 23) * TopdownShooter.instance.scaleY);
         g2d.rotate(Math.toRadians(rotation));
 
         g2d.setColor(Color.BLACK);
 
-        g2d.fillRect(-6, 20, 12, 24);
-        g2d.fillRoundRect(-9, 36, 18, 10, 4, 4);
+        g2d.fillRect((int)(-6 * TopdownShooter.instance.scaleX), (int)(20 * TopdownShooter.instance.scaleY), (int)(12 * TopdownShooter.instance.scaleX), (int)(24 * TopdownShooter.instance.scaleY));
+
+        g2d.fillRoundRect((int)(-9 * TopdownShooter.instance.scaleX), (int)(36 * TopdownShooter.instance.scaleY),
+                          (int)(18 * TopdownShooter.instance.scaleX), (int)(10 * TopdownShooter.instance.scaleY),
+                          (int)(4 * TopdownShooter.instance.scaleX), (int)(4 * TopdownShooter.instance.scaleY));
 
         g2d.setColor(Color.RED);
-        g2d.fillRoundRect(-23, -23, 46, 46, 12, 12);
+        g2d.fillRoundRect((int)(-23 * TopdownShooter.instance.scaleX), (int)(-23 * TopdownShooter.instance.scaleY),
+                          (int)(46 * TopdownShooter.instance.scaleX), (int)(46 * TopdownShooter.instance.scaleY),
+                          (int)(12 * TopdownShooter.instance.scaleX), (int)(12 * TopdownShooter.instance.scaleY));
 
         g2d.setTransform(old);
     }
