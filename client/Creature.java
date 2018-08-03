@@ -15,11 +15,23 @@ public abstract class Creature extends Entity {
     // Time until completely stil
     protected float drag = 0.1f;
 
-    protected void move(float delta_time) {
+    protected void move(float delta_time, boolean use_drag) {
         x += vel_x * delta_time;
         y += vel_y * delta_time;
 
-        vel_x *= (1 - 1 / drag * delta_time);
-        vel_y *= (1 - 1 / drag * delta_time);
+        if (use_drag) {
+            vel_x *= (1 - 1 / drag * delta_time);
+            vel_y *= (1 - 1 / drag * delta_time);
+        }
+    }
+
+    @Override
+    public void setNewData(PositionData data) {
+        super.setNewData(data);
+
+        vel_x = data.vel_x;
+        vel_y = data.vel_y;
+
+        health = data.health;
     }
 }

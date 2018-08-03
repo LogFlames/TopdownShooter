@@ -19,8 +19,8 @@ public class TopdownShooter {
     private JPanel panel;
     private static GraphicsConfiguration gc;
 
-    private int width = 800;
-    private int height = 600;
+    private int width;
+    private int height;
 
     private boolean running;
 
@@ -101,7 +101,7 @@ public class TopdownShooter {
     }
 
     private void update(float delta_time) {
-        if (frameLoopIndex > 20) {
+        if (frameLoopIndex > 5) {
             frameLoopIndex = 0;
             client.updateLocations();
             client.sendProtocol();

@@ -16,6 +16,7 @@ public class Player extends Creature {
     public Player() {
         instance = this;
         rotation = 0f;
+        health = 100;
     }
 
     @Override
@@ -26,7 +27,7 @@ public class Player extends Creature {
         g2d.rotate(Math.toRadians(rotation));
 
         g2d.setColor(Color.RED);
-        g2d.fillRect((int)x, (int)y, 30, 20);
+        g2d.fillRect((int)x, (int)y, 30, 30);
 
         g2d.setTransform(old);
     }
@@ -54,6 +55,6 @@ public class Player extends Creature {
         vel_x += toMoveX * speed;
         vel_y += toMoveY * speed;
 
-        move(delta_time);
+        move(delta_time, true);
     }
 }

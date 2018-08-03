@@ -12,18 +12,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class EnemyPlayer extends Creature {
-    public EnemyPlayer() {
 
+    public EnemyPlayer(PositionData startData) {
+        setNewData(startData);
+        health = 100;
     }
 
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.BLUE);
-        g.fillRect((int)x, (int)y, 20, 20);
+        g.fillRect((int)x, (int)y, 30, 30);
     }
 
     @Override
     public void update(float delta_time) {
-
+        move(delta_time, false);
     }
 }

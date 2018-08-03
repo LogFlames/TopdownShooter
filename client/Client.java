@@ -38,6 +38,7 @@ public class Client {
             if (input.ready()) {
                 String line;
                 while ((line = input.readLine()) != null) {
+                    System.out.print("From server -->: ");
                     System.out.println(line);
                     line = line.trim();
                     if (line.indexOf("#") <= -1) {
@@ -58,6 +59,9 @@ public class Client {
                                 e.printStackTrace();
                             }
                         }
+                        if (part.startsWith("GU")) {
+                            ParseGameUpdate(part.replace("GU", ""));
+                        }
                     }
                     if (!input.ready()) {
                         break;
@@ -69,9 +73,57 @@ public class Client {
         }
     }
 
+    public void ParseGameUpdate(String gameUpdate) {
+        PositionData pos_data = new PositionData();
+
+        // Shouldn't run, ParseGameUpdate should get called multiple times instead
+        String[] entities = gameUpdate.split("#");
+
+        for (String entity : entities) {
+            String[] dataParts = entity.split(";");
+            for (String headers : dataParts) {
+                String[] splited = headers.split(":");
+                String attr = splited[0];
+                String value = splited[1];
+
+                switch (attr) {
+                    case "identifier":
+                        pos_data.id = PositionData.tryParseInt(value);
+                        break;
+                    case "pos_x":
+                        pos_data.pos_x = PositionData.tryParseInt(value);
+                        break;
+                    case "pos_y":
+                        pos_data.pos_y = PositionData.tryParseInt(value);
+                        break;
+                    case "vel_x":
+                        pos_data.vel_x = PositionData.tryParseFloat(value);
+                        break;
+                    case "vel_y":
+                        pos_data.vel_y = PositionData.tryParseFloat(value);
+                        break;
+                    case "health":
+                        pos_data.health = PositionData.tryParseInt(value);
+                        break;
+                    case "rot":
+                        pos_data.rotation = PositionData.tryParseFloat(value);
+                        break;
+                    case "shoot":
+                        // No shooting implemented yet
+                        break;
+                    default:
+                        System.out.println(String.format("Can't handle gameUpdateKey: %s", attr)); 
+                        break;
+                }
+            }
+        }
+
+        EntityManager.instance.updateEntities(pos_data.id, pos_data);
+    }
+
     public void sendProtocol() {
-        String message = String.format("GUpos_x:%f;pos_y:%f;shoot:False;health:%d;vel_x:%f;vel_y:%f;rot:%f;",
-                                       Player.instance.x, Player.instance.y,
+        String message = String.format("GUpos_x:%d;pos_y:%d;shoot:False;health:%d;vel_x:%f;vel_y:%f;rot:%f;",
+                                       (int)Player.instance.x, (int)Player.instance.y,
                                        Player.instance.health,
                                        Player.instance.vel_x, Player.instance.vel_y,
                                        Player.instance.rotation);
@@ -80,7 +132,8 @@ public class Client {
 
     public void SendData(String data) {
         if (data != null && data != "") {
-            output.println(data + "#\n");
+            output.println(data + "#");
+            System.out.print("To server    -->:");
             System.out.println(data + "#");
         }
     }

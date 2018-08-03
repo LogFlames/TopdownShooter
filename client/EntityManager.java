@@ -10,12 +10,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 
 public class EntityManager {
+    public static EntityManager instance;
+
     private HashMap<Integer, Entity> entities;
     private Player player;
 
     public EntityManager(Player player) {
         entities = new HashMap<Integer, Entity>();
         this.player = player;
+        instance = this;
     }
 
     public void draw(Graphics g) {
@@ -52,7 +55,12 @@ public class EntityManager {
         entities.remove(id);
     }
 
-    public void updateEntities() {
-
+    public void updateEntities(int keyId, PositionData data) {
+        if (entities.containsKey(keyId) && Player.instance.id != keyId) {
+            entities.get(keyId).setNewData(data);
+        } else if (Player.instance.id != keyId) {
+            addEntity(keyId, new EnemyPlayer(data));
+        }
     }
 }
+
