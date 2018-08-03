@@ -141,7 +141,6 @@ public class Client {
         if (data != null && data != "") {
             output.println(data + "#");
         }
-        System.out.println("Data to send was empty");
     }
 
     public void closeConnection() {
