@@ -19,6 +19,19 @@ public abstract class Creature extends Entity {
         x += vel_x * delta_time;
         y += vel_y * delta_time;
 
+        if (x > 1395) {
+            x = 1395;
+        }
+        if (x < 0) {
+            x = 1;
+        }
+        if (y > 855) {
+            y = 855;
+        }
+        if (y < 0) {
+            y = 0;
+        }
+
         if (use_drag) {
             vel_x *= (1 - 1 / drag * delta_time);
             vel_y *= (1 - 1 / drag * delta_time);

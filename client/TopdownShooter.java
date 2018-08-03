@@ -35,7 +35,7 @@ public class TopdownShooter {
     private Client client;
 
     private int frameLoopIndex;
-    
+  
     public static void main(String[] agrs) {
         instance = new TopdownShooter();
         instance.init();
@@ -117,7 +117,7 @@ public class TopdownShooter {
         mouseX = mousePoint.x;
         mouseY = mousePoint.y;
         
-        if (frameLoopIndex > 1) {
+        if (frameLoopIndex > 3) {
             frameLoopIndex = 0;
             client.updateLocations();
             client.sendProtocol();
