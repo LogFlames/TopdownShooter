@@ -38,19 +38,20 @@ public class Client {
             if (input.ready()) {
                 String line;
                 while ((line = input.readLine()) != null) {
-                    System.out.print("From server -->: ");
-                    System.out.println(line);
                     line = line.trim();
                     if (line.indexOf("#") <= -1) {
                         line += "#";
                     }
+                    boolean parsed = false;
                     String[] parts = line.split("#");
                     for (String part : parts) {
                         part = part.trim();
                         if ("hb".equals(part)) {
                             SendData("hbb");
+                            parsed = true;
                         }
                         if (part.startsWith("?") && !gotId) {
+                            parsed = true;
                             part = part.replace("?", "");
                             try {
                                 Player.instance.id = Integer.parseInt(part);
@@ -60,7 +61,12 @@ public class Client {
                             }
                         }
                         if (part.startsWith("GU")) {
+                            parsed = true;
                             ParseGameUpdate(part.replace("GU", ""));
+                        }
+                        if (!parsed) {
+                            System.out.print("From server -->: ");
+                            System.out.println(line);
                         }
                     }
                     if (!input.ready()) {
@@ -134,9 +140,8 @@ public class Client {
     public void SendData(String data) {
         if (data != null && data != "") {
             output.println(data + "#");
-            System.out.print("To server    -->:");
-            System.out.println(data + "#");
         }
+        System.out.println("Data to send was empty");
     }
 
     public void closeConnection() {
