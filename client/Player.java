@@ -73,8 +73,8 @@ public class Player extends Creature {
 
         move(delta_time, true);
 
-        float del_x = TopdownShooter.instance.mouseX - (x + 23);
-        float del_y = TopdownShooter.instance.mouseY - (y + 23);
+        float del_x = TopdownShooter.instance.mouseX / TopdownShooter.instance.scaleX - (x + 23);
+        float del_y = TopdownShooter.instance.mouseY / TopdownShooter.instance.scaleY - (y + 23);
 
         if (del_x < 0) {
             rotation = (float)Math.toDegrees(Math.atan2(Math.abs(del_x), del_y));
