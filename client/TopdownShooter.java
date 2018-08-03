@@ -47,8 +47,8 @@ public class TopdownShooter {
         frame = new JFrame(gc);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setUndecorated(true);
-//        frame.setSize(width, height);
-        frame.setSize(1440, 900);
+        frame.setSize(width, height);
+//        frame.setSize(1440, 900);
         frame.setTitle("Multiplayer TopdownShooter");
         frame.setResizable(false);
         frame.setFocusable(false);

@@ -27,7 +27,7 @@ public class Player extends Creature {
         g2d.rotate(Math.toRadians(rotation));
 
         g2d.setColor(Color.RED);
-        g2d.fillRect((int)x, (int)y, 40, 40);
+        g2d.fillRect((int)x, (int)y, 35, 35);
 
         g2d.setTransform(old);
     }

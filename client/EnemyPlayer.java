@@ -21,7 +21,7 @@ public class EnemyPlayer extends Creature {
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.BLUE);
-        g.fillRect((int)x, (int)y, 42, 42);
+        g.fillRect((int)x, (int)y, 35, 36);
     }
 
     @Override
