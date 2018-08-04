@@ -69,7 +69,17 @@ public class TopdownShooter {
         frame.setTitle("Multiplayer TopdownShooter");
         frame.setResizable(false);
         frame.setFocusable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                exit();
+                System.exit(0);
+            }
+        });
 
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         try {
@@ -86,6 +96,7 @@ public class TopdownShooter {
                 draw(g);
             }
         };
+
 
         panel.setFocusable(true);
         frame.add(panel);
