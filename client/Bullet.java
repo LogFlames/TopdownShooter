@@ -16,7 +16,7 @@ public class Bullet {
     private float rotation;
     private float speed = 750f;
 
-    private double hitDistance = 24;
+    private double hitDistance = 27;
 
     private int damage = 20;
 
