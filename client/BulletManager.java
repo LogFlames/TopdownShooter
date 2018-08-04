@@ -21,6 +21,9 @@ public class BulletManager {
     }
 
     public void draw(Graphics g) {
+        if (bullets == null || bullets.size() <= 0) {
+            return;
+        }
         Bullet[] bullet_ar = bullets.toArray(new Bullet[bullets.size()]);
         for (Bullet b : bullet_ar) {
             b.draw(g);
