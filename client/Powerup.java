@@ -13,7 +13,7 @@ import java.awt.geom.Ellipse2D;
 
 public class Powerup extends Entity {
 
-    private float pickup_distance = 27;
+    private float pickup_distance = 30;
 
     private BufferedImage ammobox;
 
@@ -30,7 +30,7 @@ public class Powerup extends Entity {
 
     @Override
     public void update(float delta_time) {
-        double distance = Math.hypot(x - Player.instance.x, y - Player.instance.y);
+        double distance = Math.hypot(x - Player.instance.x + 23, y - Player.instance.y + 23);
 
         if (distance < pickup_distance) {
             Player.instance.ammo = 10;
@@ -40,6 +40,7 @@ public class Powerup extends Entity {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(ammobox, (int)(x - 32), (int)(y - 32), 64, 64, null);
+        g.drawImage(ammobox, (int)((x - 32) * TopdownShooter.instance.scaleX), (int)((y - 32) * TopdownShooter.instance.scaleY),
+                    (int)(56 * TopdownShooter.instance.scaleX), (int)(56 * TopdownShooter.instance.scaleY), null);
     }
 }
