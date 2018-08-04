@@ -59,8 +59,10 @@ public class Player extends Creature {
         double h = 46 * TopdownShooter.instance.scaleY;
 
         g2d.draw(new RoundRectangle2D.Double(x, y, w, h, 12 * TopdownShooter.instance.scaleX, 12 * TopdownShooter.instance.scaleY));
-        
+       
         g2d.setTransform(old);
+
+        drawHealthBar(g);
     }
 
     @Override

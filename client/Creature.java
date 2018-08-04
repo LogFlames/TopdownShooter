@@ -6,6 +6,8 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.RoundRectangle2D;
 
 public abstract class Creature extends Entity {
     public int health;
@@ -38,6 +40,31 @@ public abstract class Creature extends Entity {
         }
     }
 
+    public void drawHealthBar(Graphics g) {
+        Graphics2D g2d = (Graphics2D)g;
+
+        AffineTransform old = g2d.getTransform();
+        g2d.translate((x + 23) * TopdownShooter.instance.scaleX, (y + 23) * TopdownShooter.instance.scaleY);
+
+        g2d.setColor(Color.GREEN);
+
+        float filled = health / 100f * 56f;
+        g2d.fillRoundRect((int)(-28 * TopdownShooter.instance.scaleX), (int)(-64 * TopdownShooter.instance.scaleY),
+                          (int)(filled * TopdownShooter.instance.scaleX), (int)(12 * TopdownShooter.instance.scaleY),
+                          (int)(12 * TopdownShooter.instance.scaleX), (int)(12 * TopdownShooter.instance.scaleY));
+
+        g2d.setPaint(Color.BLACK);
+        g2d.setStroke(new BasicStroke(3.0f));
+        double x = -28 * TopdownShooter.instance.scaleX;
+        double y = -64 * TopdownShooter.instance.scaleY;
+        double w = 56 * TopdownShooter.instance.scaleX;
+        double h = 12 * TopdownShooter.instance.scaleY;
+
+        g2d.draw(new RoundRectangle2D.Double(x, y, w, h, 12 * TopdownShooter.instance.scaleX, 12 * TopdownShooter.instance.scaleY));
+       
+        g2d.setTransform(old);
+    }
+
     @Override
     public void setNewData(PositionData data) {
         super.setNewData(data);
@@ -58,5 +85,6 @@ public abstract class Creature extends Entity {
     public void die() {
         x = 0;
         y = 0;
+        health = 100;
     }
 }
