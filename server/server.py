@@ -33,7 +33,7 @@ for port in range(1024, 1049):
 # We should have a good way to keep track of active connections
 
 connections = []
-clientID = 1
+clientID = 0
 
 powerUp = False
 
@@ -54,9 +54,9 @@ while True:
 		s = False
 	
 	if s:
+		clientID += 1
 		connections.append([ClientClass(clientID, s, addr), True])
 		s.send(('?' + str(clientID) + '#\n').encode('utf-8'))
-		clientID += 1
 		
 		s.settimeout(0.2)
 		s.setblocking(0)
@@ -106,7 +106,7 @@ while True:
 				connections[n][0].sendToClient('hb#')
 		last_hearbeat = time.time()
 	
-	if random.random() > 0.995:
+	if random.random() > 0.995 and connections:
 		clientID += 1
 		powerUp = 'PUidentifier:{};pos_x:{};pos_y:{}#'.format(clientID, random.random(), random.random())
 		for c in connections:

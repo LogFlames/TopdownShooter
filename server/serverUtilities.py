@@ -45,7 +45,7 @@ def broadcastGameUpdate(conn):
 			c[0].clientID, c[0].pos_x, c[0].pos_y, c[0].health, c[0].vel_x,
 			c[0].vel_y, c[0].rotation, c[0].shoot, c[0].power
 		)
-	
+
 	# Now, when the string is ready, we can send it to everyone
 	for client in conn:
 		try:
