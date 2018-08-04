@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.RoundRectangle2D;
 
 public class Player extends Creature {
     public static Player instance;
@@ -43,6 +44,15 @@ public class Player extends Creature {
                           (int)(46 * TopdownShooter.instance.scaleX), (int)(46 * TopdownShooter.instance.scaleY),
                           (int)(12 * TopdownShooter.instance.scaleX), (int)(12 * TopdownShooter.instance.scaleY));
 
+        g2d.setPaint(new Color(255, 130, 130));
+        g2d.setStroke(new BasicStroke(6.0f));
+        double x = -23 * TopdownShooter.instance.scaleX;
+        double y = -23 * TopdownShooter.instance.scaleY;
+        double w = 46 * TopdownShooter.instance.scaleX;
+        double h = 46 * TopdownShooter.instance.scaleY;
+
+        g2d.draw(new RoundRectangle2D.Double(x, y, w, h, 12 * TopdownShooter.instance.scaleX, 12 * TopdownShooter.instance.scaleY));
+        
         g2d.setTransform(old);
     }
 
