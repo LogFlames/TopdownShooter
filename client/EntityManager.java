@@ -38,12 +38,12 @@ public class EntityManager {
             e.update(delta_time);
         }
 
-        Iterator<Entity> iter = entities.values().iterator();
+        Iterator<HashMap.Entry<Integer, Entity>> iter = entities.entrySet().iterator();
 
         while (iter.hasNext()) {
-            Entity e = iter.next();
+            HashMap.Entry<Integer, Entity> e = (HashMap.Entry<Integer, Entity>)iter.next();
 
-            if (e.toRemove) {
+            if (e.getValue().toRemove) {
                 iter.remove();
             }
         }
