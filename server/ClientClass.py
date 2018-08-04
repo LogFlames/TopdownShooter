@@ -48,7 +48,7 @@ class ClientClass:
 		elif attr == 'health':
 			self.health = val
 
-		elif attr == 'rotation':
+		elif attr == 'rot':
 			self.rotation = val
 
 		elif attr == 'shoot':

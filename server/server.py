@@ -85,8 +85,8 @@ while True:
 			if connections == None:
 				connections = []
 
-			# if incoming:
-				# print('From {}: {}'.format(Client.addr, incoming))
+			if incoming:
+				print('From {}: {}'.format(Client.addr, incoming))
 		except:
 			pass
 
