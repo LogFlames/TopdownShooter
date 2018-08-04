@@ -198,7 +198,7 @@ public class Client {
                     break;
             }
         }
-        EntityManager.instance.addEntity(id, new Powerup(pos_x, pos_y));
+        EntityManager.instance.addEntity(id, new Powerup(pos_x, pos_y, id));
     }
 
     public void pickupPowerup(PositionData data) {

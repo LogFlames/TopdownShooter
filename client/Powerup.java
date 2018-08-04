@@ -17,7 +17,7 @@ public class Powerup extends Entity {
 
     private BufferedImage ammobox;
 
-    public Powerup(float startX, float startY) {
+    public Powerup(float startX, float startY, int id) {
         try {
             ammobox = ImageIO.read(new File("assets/ammobox.png"));
         } catch (IOException e) {
@@ -26,6 +26,8 @@ public class Powerup extends Entity {
 
         x = startX;
         y = startY;
+
+        this.id = id;
     }
 
     @Override
