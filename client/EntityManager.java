@@ -22,10 +22,14 @@ public class EntityManager {
     }
 
     public void draw(Graphics g) {
-        for (Entity e : entities.values()) {
-            e.draw(g);
+        if (entities != null && entities.size() > 0) {
+            for (Entity e : entities.values()) {
+                e.draw(g);
+            }
         }
-        player.draw(g);
+        if (player != null) {
+            player.draw(g);
+        }
     }
 
     public void update(float delta_time) {
