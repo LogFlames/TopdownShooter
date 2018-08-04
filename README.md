@@ -8,7 +8,7 @@
 ### Running your own server
 This is not properly supported at the moment, but it is still possible at the moment with the Java SDK
 1. Open `client/Client.java` in an editor 
-2. Set your port to 1024 on line `19` 
+2. Set your port to 1024-1(1023) on line `19` 
 3. Enter your ip-address on line `23`
 4. Compile, run the server and connect via the client
 ## Known bugs
