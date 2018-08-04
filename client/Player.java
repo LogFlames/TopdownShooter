@@ -20,7 +20,7 @@ public class Player extends Creature {
     public int ammo;
 
     private float nextAmmo;
-    private float timeBetweenAmmo = 0.8f;
+    private float timeBetweenAmmo = 1.2f;
 
     public Player() {
         instance = this;

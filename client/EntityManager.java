@@ -33,6 +33,16 @@ public class EntityManager {
         for (Entity e : entities.values()) {
             e.update(delta_time);
         }
+
+        Iterator<Entity> iter = entities.values().iterator();
+
+        while (iter.hasNext()) {
+            Entity e = iter.next();
+
+            if (e.toRemove) {
+                iter.remove();
+            }
+        }
     }
 
     public Player getPlayer() {

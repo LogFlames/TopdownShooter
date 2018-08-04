@@ -70,6 +70,10 @@ public class Client {
                             parsed = true;
                             ParseGameUpdate(part.replace("GU", ""));
                         }
+                        if (part.startsWith("PU")) {
+                            parsed = true;
+                            ParsePowerup(part.replace("PU", ""));
+                        }
                         if (!parsed) {
                             System.out.print("(Not parsed) From server -->: ");
                             System.out.println(line);
@@ -158,6 +162,10 @@ public class Client {
         }
 
         BulletManager.instance.addBullet(new Bullet(x, y, rot, c, data.id));
+    }
+
+    public void ParsePowerup(String data) {
+
     }
 
     public void sendProtocol() {

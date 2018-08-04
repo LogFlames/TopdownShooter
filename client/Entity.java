@@ -16,6 +16,8 @@ public abstract class Entity {
     protected abstract void draw(Graphics g);
     protected abstract void update(float delta_time);
 
+    public boolean toRemove;
+
     public void setNewData(PositionData data) {
         x = data.pos_x;
         y = data.pos_y;
