@@ -67,6 +67,7 @@ public class Bullet {
 
             if (distance <= hitDistance) {
                 Player.instance.hit(damage);
+                toRemove = true;
             }
         }
     }
