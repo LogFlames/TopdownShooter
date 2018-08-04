@@ -12,7 +12,6 @@ import java.awt.geom.RoundRectangle2D;
 public class Player extends Creature {
     public static Player instance;
     private float speed = 40;
-    public int id;
 
     public float shootRotation;
     public boolean shootThisFrame;

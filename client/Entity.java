@@ -13,6 +13,8 @@ public abstract class Entity {
 
     protected float rotation;
 
+    public int id;
+
     protected abstract void draw(Graphics g);
     protected abstract void update(float delta_time);
 

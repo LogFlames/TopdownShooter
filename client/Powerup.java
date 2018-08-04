@@ -35,6 +35,8 @@ public class Powerup extends Entity {
         if (distance < pickup_distance) {
             Player.instance.ammo = 10;
             toRemove = true;
+            Player.instance.pickedupPowerup = true;
+            Player.instance.powerupPickedupId = id;
         }
     }
 
