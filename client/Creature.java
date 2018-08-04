@@ -46,7 +46,18 @@ public abstract class Creature extends Entity {
         AffineTransform old = g2d.getTransform();
         g2d.translate((x + 23) * TopdownShooter.instance.scaleX, (y + 23) * TopdownShooter.instance.scaleY);
 
-        g2d.setColor(Color.GREEN);
+
+        int red;
+        int green;
+        if (health > 50) {
+            red = (int)((100.0 - health) / 50.0 * 255.0);
+            green = 255;
+        } else {
+            red = 255;
+            green = (int)((health) / 50.0 * 255.0);
+        }
+
+        g2d.setColor(new Color(red, green, 0));
 
         float filled = health / 100f * 56f;
         g2d.fillRoundRect((int)(-28 * TopdownShooter.instance.scaleX), (int)(-64 * TopdownShooter.instance.scaleY),
