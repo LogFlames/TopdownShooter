@@ -30,7 +30,7 @@ public class Powerup extends Entity {
 
     @Override
     public void update(float delta_time) {
-        double distance = Math.hypot(x - Player.instance.x + 23, y - Player.instance.y + 23);
+        double distance = Math.hypot(x - (Player.instance.x + 23), y - (Player.instance.y + 23));
 
         if (distance < pickup_distance) {
             Player.instance.ammo = 10;
