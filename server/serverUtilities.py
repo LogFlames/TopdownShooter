@@ -44,8 +44,6 @@ def broadcastGameUpdate(conn):
 		gu += 'GUidentifier:{};pos_x:{};pos_y:{};health:{};vel_x:{};vel_y:{};rot:{};shoot:{}#'.format(
 			c[0].clientID, c[0].pos_x, c[0].pos_y, c[0].health, c[0].vel_x, c[0].vel_y, c[0].rotation, c[0].shoot
 		)
-
-		# print(gu)
 	
 	# Now, when the string is ready, we can send it to everyone
 	for client in conn:
@@ -53,4 +51,3 @@ def broadcastGameUpdate(conn):
 			client[0].clientSocket.send((gu + '\n').encode('utf-8'))
 		except:
 			pass
-		

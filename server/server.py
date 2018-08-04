@@ -1,10 +1,7 @@
 
 # -*- coding: utf-8 -*-
 
-import socket
-import sys
-import select
-import time
+import socket, sys, select, time, random
 
 from serverUtilities import *
 from ClientClass import *
@@ -37,6 +34,8 @@ for port in range(1024, 1049):
 
 connections = []
 clientID = 1
+
+powerUp = False
 
 serverSocket.listen(5)
 serverSocket.settimeout(0.03)
@@ -85,8 +84,8 @@ while True:
 			if connections == None:
 				connections = []
 
-			if incoming:
-				print('From {}: {}'.format(Client.addr, incoming))
+			# if incoming:
+				# print('From {}: {}'.format(Client.addr, incoming))
 		except:
 			pass
 
@@ -106,6 +105,11 @@ while True:
 				connections[n][1] = False
 				connections[n][0].sendToClient('hb#')
 		last_hearbeat = time.time()
+	
+	if random.random() > 0.998 and not powerUp:
+		powerUp = 'PUpos_x:{};pos_y:{}#'.format(random.random(), random.random)
+		for c in connections:
+			c[0].clientSocket.send(powerUp + '\n')
 
 serverSocket.close()
 sys.exit()
