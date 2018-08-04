@@ -47,4 +47,16 @@ public abstract class Creature extends Entity {
 
         health = data.health;
     }
+
+    public void hit(int amount) {
+        health -= amount;
+        if (health <= 0) {
+            die();
+        }
+    }
+
+    public void die() {
+        x = 0;
+        y = 0;
+    }
 }

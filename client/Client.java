@@ -143,7 +143,7 @@ public class Client {
     }
 
     public void ParseBullet(PositionData data) {
-        int x = data.pos_x + 23 + ;
+        int x = data.pos_x + 23;
         int y = data.pos_y + 23;
         float rot = data.bulletRotation;
 
@@ -157,7 +157,7 @@ public class Client {
             c = Color.BLACK;
         }
 
-        BulletManager.instance.addBullet(new Bullet(x, y, rot, c));
+        BulletManager.instance.addBullet(new Bullet(x, y, rot, c, data.id));
     }
 
     public void sendProtocol() {
