@@ -26,7 +26,9 @@ public class BulletManager {
         }
         Bullet[] bullet_ar = bullets.toArray(new Bullet[bullets.size()]);
         for (Bullet b : bullet_ar) {
-            b.draw(g);
+            if (b != null) {
+                b.draw(g);
+            }
         }
     }
 

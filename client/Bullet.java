@@ -16,14 +16,21 @@ public class Bullet {
     private float rotation;
     private float speed = 500f;
 
+    private double hitDistance = 24;
+
+    private int damage = 20;
+
     public boolean toRemove;
+
+    public int id;
 
     private Color drawingColor;
 
-    public Bullet(float startX, float startY, float rotation, Color c) {
+    public Bullet(float startX, float startY, float rotation, Color c, int id) {
         x = startX;
         y = startY;
         this.rotation = rotation;
+        this.id = id;
         toRemove = false;
 
         if (c == null) {
@@ -52,6 +59,15 @@ public class Bullet {
 
         if (x > 1440 || x < 0 || y > 900 || y < 0) {
             toRemove = true;
+            return;
+        }
+
+        if (id != Player.instance.id) {
+            double distance = Math.hypot(x - Player.instance.x, y - Player.instance.y);
+
+            if (distance <= hitDistance) {
+                Player.instance.hit(damage);
+            }
         }
     }
 }

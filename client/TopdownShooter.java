@@ -34,6 +34,8 @@ public class TopdownShooter {
     private EntityManager entityManager;
     private BulletManager bulletManager;
 
+    private DrawGUI drawGUI;
+
     public InputData inputData;
 
     private Client client;
@@ -110,6 +112,7 @@ public class TopdownShooter {
         bulletManager = new BulletManager();
         client = new Client();
         inputData = new InputData();
+        drawGUI = new DrawGUI();
 
         scaleX = width / 1440f;
         scaleY = height / 900f;
@@ -166,6 +169,9 @@ public class TopdownShooter {
         }
         if (entityManager != null) {
             entityManager.draw(g);
+        }
+        if (drawGUI != null) {
+            drawGUI.draw(g);
         }
     }
 
