@@ -34,7 +34,7 @@ public class EnemyPlayer extends Creature {
 
         g2d.fillRoundRect((int)(-9 * TopdownShooter.instance.scaleX), (int)(36 * TopdownShooter.instance.scaleY),
                           (int)(18 * TopdownShooter.instance.scaleX), (int)(10 * TopdownShooter.instance.scaleY),
-                          (int)(4 * TopdownShooter.instance.scaleX), (int)(4 * TopdownShooter.instance.scaleY));
+                          (int)(2 * TopdownShooter.instance.scaleX), (int)(2 * TopdownShooter.instance.scaleY));
 
         g2d.setColor(Color.BLUE);
         g2d.fillRoundRect((int)(-23 * TopdownShooter.instance.scaleX), (int)(-23 * TopdownShooter.instance.scaleY),
