@@ -151,6 +151,7 @@ public class Client {
         }
 
         if (pickedupPowerup) {
+            pickupPowerup(pos_data);
         }
 
         EntityManager.instance.updateEntities(pos_data.id, pos_data);
