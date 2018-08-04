@@ -106,8 +106,9 @@ while True:
 				connections[n][0].sendToClient('hb#')
 		last_hearbeat = time.time()
 	
-	if random.random() > 0.998 and not powerUp:
-		powerUp = 'PUpos_x:{};pos_y:{}#'.format(random.random(), random.random)
+	if random.random() > 0.995:
+		clientID += 1
+		powerUp = 'PUidentifier:{};pos_x:{};pos_y:{}#'.format(clientID, random.random(), random.random())
 		for c in connections:
 			c[0].clientSocket.send(powerUp + '\n')
 

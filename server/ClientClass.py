@@ -17,6 +17,7 @@ class ClientClass:
 		self.addr = addr
 
 		self.shoot = False
+		self.power = False
 
 	def getValues(self):
 		return 'id:{};pos_x:{};pos_y:{};health:{};vel_x:{};vel_y:{};rot:{};'.format(self.clientID, self.x, self.y, self.health, self.vel_x, self.vel_y, self.rotation)
@@ -53,5 +54,8 @@ class ClientClass:
 
 		elif attr == 'shoot':
 			self.shoot = val
+
+		elif attr == 'power':
+			self.power = val
 
 		# Probably the ugliest code I've ever written
