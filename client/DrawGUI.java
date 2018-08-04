@@ -15,6 +15,8 @@ public class DrawGUI {
     private BufferedImage heart;
     private BufferedImage ammo;
 
+    private int textHeight = 859;
+
     public DrawGUI() {
         heart = null;
         ammo = null;
@@ -30,8 +32,12 @@ public class DrawGUI {
         g.setColor(Color.BLACK);
 
         g.setFont(new Font("Lucida Sans", Font.PLAIN, (int)(40 * TopdownShooter.instance.scaleX)));
-        g.drawString(Integer.toString(Player.instance.health), (int)(85 * TopdownShooter.instance.scaleX), (int)(857 * TopdownShooter.instance.scaleY));
+        g.drawString(Integer.toString(Player.instance.health), (int)(85 * TopdownShooter.instance.scaleX), (int)(textHeight * TopdownShooter.instance.scaleY));
         g.drawImage(heart, (int)(15 * TopdownShooter.instance.scaleX), (int)(820 * TopdownShooter.instance.scaleY),
+                    (int)(56 * TopdownShooter.instance.scaleX), (int)(56 * TopdownShooter.instance.scaleY), null);
+
+        g.drawString(Integer.toString(Player.instance.ammo) + "/10", (int)(250 * TopdownShooter.instance.scaleX), (int)(textHeight * TopdownShooter.instance.scaleY));
+        g.drawImage(ammo, (int)(190 * TopdownShooter.instance.scaleX), (int)(812 * TopdownShooter.instance.scaleY),
                     (int)(56 * TopdownShooter.instance.scaleX), (int)(56 * TopdownShooter.instance.scaleY), null);
     }
 }

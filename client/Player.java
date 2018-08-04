@@ -17,10 +17,17 @@ public class Player extends Creature {
     public float shootRotation;
     public boolean shootThisFrame;
 
+    public int ammo;
+
+    private float nextAmmo;
+    private float timeBetweenAmmo = 0.8f;
+
     public Player() {
         instance = this;
         rotation = 0f;
         health = 100;
+        ammo = 10;
+        nextAmmo = timeBetweenAmmo;
     }
 
     @Override
@@ -37,7 +44,7 @@ public class Player extends Creature {
 
         g2d.fillRoundRect((int)(-9 * TopdownShooter.instance.scaleX), (int)(36 * TopdownShooter.instance.scaleY),
                           (int)(18 * TopdownShooter.instance.scaleX), (int)(10 * TopdownShooter.instance.scaleY),
-                          (int)(4 * TopdownShooter.instance.scaleX), (int)(4 * TopdownShooter.instance.scaleY));
+                          (int)(2 * TopdownShooter.instance.scaleX), (int)(2 * TopdownShooter.instance.scaleY));
 
         g2d.setColor(Color.RED);
         g2d.fillRoundRect((int)(-23 * TopdownShooter.instance.scaleX), (int)(-23 * TopdownShooter.instance.scaleY),
@@ -99,11 +106,22 @@ public class Player extends Creature {
         }
         rotation %= 360;
 
-        if (TopdownShooter.instance.inputData.shoot) {
-            TopdownShooter.instance.inputData.shoot = false;
+        if (nextAmmo < 10) {
+            nextAmmo -= delta_time;
+        } else {
+            nextAmmo = timeBetweenAmmo;
+        }
 
+        if (nextAmmo <= 0 && ammo < 10) {
+            ammo++;
+            nextAmmo = timeBetweenAmmo;
+        }
+
+        if (TopdownShooter.instance.inputData.shoot && ammo >= 1) {
+            ammo--;
             shootRotation = rotation;
             shootThisFrame = true;
         }
+        TopdownShooter.instance.inputData.shoot = false;
     }
 }
