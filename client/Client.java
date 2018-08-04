@@ -92,6 +92,7 @@ public class Client {
     public void ParseGameUpdate(String gameUpdate) {
         PositionData pos_data = new PositionData();
         boolean createdBullet = false;
+        boolean pickedupPowerup = false;
 
         // Shouldn't run, ParseGameUpdate should get called multiple times instead
         String[] entities = gameUpdate.split("#");
@@ -132,6 +133,12 @@ public class Client {
                             createdBullet = true;
                         }
                         break;
+                    case "power":
+                        if (!"False".equals(value)) {
+                            pos_data.powerupId = PositionData.tryParseInt(value);
+                            pickedupPowerup = true;
+                        }
+                        break;
                     default:
                         System.out.println(String.format("Can't handle gameUpdateKey: %s", attr)); 
                         break;
@@ -141,6 +148,9 @@ public class Client {
 
         if (createdBullet) {
             ParseBullet(pos_data);
+        }
+
+        if (pickedupPowerup) {
         }
 
         EntityManager.instance.updateEntities(pos_data.id, pos_data);
@@ -165,7 +175,39 @@ public class Client {
     }
 
     public void ParsePowerup(String data) {
+        String[] parts = data.split(";");
+        int pos_x = 0;
+        int pos_y = 0;
+        int id = 0;
+        for (String part : parts) {
+            String[] attrs = part.split(":");
+            String attribute = attrs[0];
+            String value = attrs[1];
+            switch (attribute) {
+                case "identifier":
+                    id = PositionData.tryParseInt(value);
+                    break;
+                case "pos_x":
+                    pos_x = (int)(PositionData.tryParseFloat(value) * 1440);
+                    break;
+                case "pos_y":
+                    pos_y = (int)(PositionData.tryParseFloat(value) * 900);
+                    break;
+                default:
+                    System.out.println("No way to parse: " + part + " in powerup update from server.");
+                    break;
+            }
+        }
+        EntityManager.instance.addEntity(id, new Powerup(pos_x, pos_y));
+    }
 
+    public void pickupPowerup(PositionData data) {
+        if (data.id == Player.instance.id) {
+            // we already removed theat powerup locally
+            return;
+        }
+
+        EntityManager.instance.removeEntity(data.powerupId);
     }
 
     public void sendProtocol() {
@@ -174,11 +216,16 @@ public class Client {
             shootPart = Float.toString((Player.instance.shootRotation + 90f) % 360f);
             Player.instance.shootThisFrame = false;
         }
-        String message = String.format("GUpos_x:%d;pos_y:%d;shoot:%s;health:%d;vel_x:%f;vel_y:%f;rot:%f;",
+        String powerupPart = "False";
+        if (Player.instance.pickedupPowerup) {
+            powerupPart = Integer.toString(Player.instance.powerupPickedupId);
+            Player.instance.pickedupPowerup = false;
+        }
+        String message = String.format("GUpos_x:%d;pos_y:%d;shoot:%s;health:%d;vel_x:%f;vel_y:%f;rot:%f;power:%s;#",
                                        (int)Player.instance.x, (int)Player.instance.y,
                                        shootPart, Player.instance.health,
                                        Player.instance.vel_x, Player.instance.vel_y,
-                                       Player.instance.rotation);
+                                       Player.instance.rotation, powerupPart);
         SendData(message);
     }
 

@@ -12,6 +12,8 @@ public class PositionData {
 
     public float bulletRotation;
 
+    public int powerupId;
+
     public int id;
 
     public static int tryParseInt(String toPar) {

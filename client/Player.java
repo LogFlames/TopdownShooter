@@ -22,6 +22,9 @@ public class Player extends Creature {
     private float nextAmmo;
     private float timeBetweenAmmo = 1.2f;
 
+    public int powerupPickedupId;
+    public boolean pickedupPowerup;
+
     public Player() {
         instance = this;
         rotation = 0f;
