@@ -70,7 +70,8 @@ public class TopdownShooter {
         frame.setResizable(false);
         frame.setFocusable(false);
 
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+/*
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -80,6 +81,7 @@ public class TopdownShooter {
                 System.exit(0);
             }
         });
+*/
 
         GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         try {
@@ -120,6 +122,7 @@ public class TopdownShooter {
     }
 
     public void exit() {
+        System.out.println("Closed");
         client.closeConnection();
     }
 

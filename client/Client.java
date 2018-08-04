@@ -143,9 +143,12 @@ public class Client {
     }
 
     public void ParseBullet(PositionData data) {
-        int x = data.pos_x + 23;
+        int x = data.pos_x + 23 + ;
         int y = data.pos_y + 23;
         float rot = data.bulletRotation;
+
+        x += (int)Math.cos(Math.toRadians(rot)) * 36f;
+        y += (int)Math.sin(Math.toRadians(rot)) * 36f;
 
         Color c;
         if (data.id == Player.instance.id) {
