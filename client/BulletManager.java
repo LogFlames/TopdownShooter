@@ -50,13 +50,14 @@ public class BulletManager {
         bullets.add(bullet);
     }
 
-    public void delteBulletsFromPositionWithRadius(float x, float y, float rad) {
+    public void delteBulletsFromPositionWithRadius(float x, float y, float rad, float minRad) {
         Iterator<Bullet> iter = bullets.iterator();
 
         while (iter.hasNext()) {
             Bullet b = iter.next();
 
-            if (Math.hypot(b.x - x, b.y - y) < rad) {
+            double dist = Math.hypot(b.x - x, b.y - y);
+            if (dist < rad && dist > minRad) {
                 iter.remove();
             }
         }

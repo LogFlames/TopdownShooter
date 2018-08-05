@@ -33,6 +33,8 @@ public class Powerup extends Entity {
                 image = ImageIO.read(new File("assets/ammobox.png"));
             } else if ("clear_bullets".equals(type)) {
                 image = ImageIO.read(new File("assets/clear_bullets.png"));
+            } else if ("health_kit".equals(type)) {
+                image = ImageIO.read(new File("assets/health_kit.png"));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -52,12 +54,18 @@ public class Powerup extends Entity {
 
         if (distance < pickup_distance) {
             toRemove = true;
+
+            if ("ammo".equals(typeOfPowerup)) {
+                Player.instance.ammo = 10;
+            } else if ("health_kit".equals(typeOfPowerup)) {
+                Player.instance.health = 100;
+            }
         }
 
         if (ringStarted) {
             ringRadius += ringSpeed * delta_time;
 
-            BulletManager.instance.delteBulletsFromPositionWithRadius(x, y, ringRadius / 2);
+            BulletManager.instance.delteBulletsFromPositionWithRadius(x, y, ringRadius / 2, ringRadius / 2 - 14);
 
             if (ringRadius > 2880) {
                 ringDone = true;
@@ -82,8 +90,7 @@ public class Powerup extends Entity {
 
     @Override
     public boolean onDeath() {
-        if ("ammo".equals(typeOfPowerup)) {
-            Player.instance.ammo = 10;
+        if ("ammo".equals(typeOfPowerup) || "health_kit".equals(typeOfPowerup)) {
             Player.instance.pickedupPowerup = true;
             Player.instance.powerupPickedupId = id;
             return true;
