@@ -76,7 +76,7 @@ public class EntityManager {
             System.out.println("No entity with the id: " + id + " exists.");
             return;
         }
-        entities.remove(id);
+        entities.get(id).toRemove = true;
     }
 
     public void updateEntities(int keyId, PositionData data) {
