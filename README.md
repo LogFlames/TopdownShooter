@@ -15,7 +15,8 @@ This is not properly supported at the moment, but it is still possible at the mo
 ### Compilation errors
 If you get `Coulnd't find javac` or `Coulnd't find java` in the terminal  
 Download: [Java](https://www.java.com/sv/download/)  
-If that doesn't fix the issue, please post an Issue
+If that doesn't fix the issue, please copy the terminal output and post an Issue  
+If you can fix it, please post an pull request
 ## Known bugs
 * Server cannot run in Python 3 (Issue [#1](https://github.com/LogFlames/TopdownShooter/issues/1))
 * Server is unprotected from invalid data (Issue [#2](https://github.com/LogFlames/TopdownShooter/issues/2))
