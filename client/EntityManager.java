@@ -73,7 +73,7 @@ public class EntityManager {
 
     public void removeEntity(int id) {
         if (!entities.containsKey(id)) {
-            System.out.println("No entity with the id: " + id + " exists.");
+            //System.out.println("No entity with the id: " + id + " exists.");
             return;
         }
         entities.get(id).toRemove = true;
