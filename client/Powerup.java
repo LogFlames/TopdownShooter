@@ -58,7 +58,7 @@ public class Powerup extends Entity {
             if ("ammo".equals(typeOfPowerup)) {
                 Player.instance.ammo = 10;
             } else if ("health_kit".equals(typeOfPowerup)) {
-                Player.instance.health = Math.max(Player.instance.health + 40, 100);
+                Player.instance.health = Math.min(Player.instance.health + 40, 100);
             }
         }
 
