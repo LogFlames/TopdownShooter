@@ -22,7 +22,7 @@ public class EntityManager {
     }
 
     public void draw(Graphics g) {
-        if (entities != null && entities.size() > 0) {
+        if (entities != null && entities.size() > 0 && entities.values() != null && entities.values().size() > 0) {
             for (Entity e : entities.values()) {
                 if (e != null) {
                     try {
