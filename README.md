@@ -9,7 +9,7 @@
 This is not properly supported at the moment, but it is still possible at the moment with the Java SDK
 1. Open `client/Client.java` in an editor 
 2. Enter your ip-address on line `23`
-3. Compile the java code
+3. Compile the java code by running `javac *.java` when in the `master/client` folder
 4. Run the `server/server.py` file with Python 2.7
 5. Start the java client via `java Topdownshooter` from the client folder
 ## Known bugs
