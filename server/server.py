@@ -107,8 +107,9 @@ while True:
 		last_hearbeat = time.time()
 	
 	if random.random() > 0.995 and connections:
+		powerType = random.choice(['ammobox'])
 		clientID += 1
-		powerUp = 'PUidentifier:{};pos_x:{};pos_y:{}#'.format(clientID, random.random(), random.random())
+		powerUp = 'PUidentifier:{};pos_x:{};pos_y:{};pow_type:{}#'.format(clientID, random.random(), random.random(), powerType)
 		for c in connections:
 			c[0].clientSocket.send(powerUp + '\n')
 
