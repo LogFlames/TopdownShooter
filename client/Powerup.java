@@ -13,7 +13,7 @@ import java.awt.geom.Ellipse2D;
 
 public class Powerup extends Entity {
 
-    private float pickup_distance = 32;
+    private float pickup_distance = 38;
 
     private BufferedImage image;
 
@@ -67,7 +67,7 @@ public class Powerup extends Entity {
 
             BulletManager.instance.delteBulletsFromPositionWithRadius(x, y, ringRadius / 2, ringRadius / 2 - 14);
 
-            if (ringRadius > 2880) {
+            if (ringRadius > 3400) {
                 ringDone = true;
                 toRemove = true;
             }

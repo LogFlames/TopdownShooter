@@ -128,4 +128,12 @@ public class Player extends Creature {
         }
         TopdownShooter.instance.inputData.shoot = false;
     }
+
+    @Override
+    public void die() {
+        x = 0;
+        y = 0;
+        health = 100;
+        ammo = 10;
+    }
 }
