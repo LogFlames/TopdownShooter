@@ -13,7 +13,7 @@ import java.awt.geom.Ellipse2D;
 
 public class Powerup extends Entity {
 
-    private float pickup_distance = 30;
+    private float pickup_distance = 32;
 
     private BufferedImage image;
 
@@ -22,10 +22,10 @@ public class Powerup extends Entity {
     private String typeOfPowerup;
 
     // This is for clear-bullets type of powerup
-    private float ringSpeed;
+    private float ringSpeed = 400f;
     private boolean ringStarted;
     private boolean ringDone;
-    private float ringRadius;
+    private float ringRadius = 0f;
 
     public Powerup(float startX, float startY, int id, String type) {
         try {
@@ -66,12 +66,14 @@ public class Powerup extends Entity {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(image, (int)((x - 32) * TopdownShooter.instance.scaleX), (int)((y - 32) * TopdownShooter.instance.scaleY),
-                    (int)(56 * TopdownShooter.instance.scaleX), (int)(56 * TopdownShooter.instance.scaleY), null);
-
+        Graphics2D g2d = (Graphics2D)g;
         if (ringStarted) {
-            g.setColor(Color.GREEN);
-            g.drawOval((int)(x - ringRadius / 2), (int)(y - ringRadius / 2), (int)ringRadius, (int)ringRadius);
+            g2d.setColor(Color.GREEN);
+            g2d.setStroke(new BasicStroke(10f));
+            g2d.drawOval((int)(x - ringRadius / 2), (int)(y - ringRadius / 2), (int)ringRadius, (int)ringRadius);
+        } else {
+            g2d.drawImage(image, (int)((x - 32) * TopdownShooter.instance.scaleX), (int)((y - 32) * TopdownShooter.instance.scaleY),
+                    (int)(56 * TopdownShooter.instance.scaleX), (int)(56 * TopdownShooter.instance.scaleY), null);
         }
     }
 
@@ -87,6 +89,7 @@ public class Powerup extends Entity {
             ringStarted = true;
             return false;
         } else if (ringStarted && ringDone) {
+            System.out.println("Removed");
             return true;
         }
         return true;
