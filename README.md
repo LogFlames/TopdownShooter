@@ -13,8 +13,8 @@ This is not properly supported at the moment, but it is still possible at the mo
 4. Run the `server/server.py` file with Python 2.7
 5. Start the java client via `java Topdownshooter` when in the `client` folder
 ### Compilation errors
-`Coulnd't find javac` or `Coulnd't find java` in the terminal
-Download: [Java](https://www.java.com/sv/download/)
+If you get `Coulnd't find javac` or `Coulnd't find java` in the terminal  
+Download: [Java](https://www.java.com/sv/download/)  
 If that doesn't fix the issue, please post an Issue
 ## Known bugs
 * Server cannot run in Python 3 (Issue [#1](https://github.com/LogFlames/TopdownShooter/issues/1))
