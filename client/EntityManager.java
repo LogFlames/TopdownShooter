@@ -25,7 +25,11 @@ public class EntityManager {
         if (entities != null && entities.size() > 0) {
             for (Entity e : entities.values()) {
                 if (e != null) {
-                    e.draw(g);
+                    try {
+                        e.draw(g);
+                    } catch (Exception ex) {
+
+                    }
                 }
             }
         }

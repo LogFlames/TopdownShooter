@@ -22,7 +22,7 @@ public class Powerup extends Entity {
     private String typeOfPowerup;
 
     // This is for clear-bullets type of powerup
-    private float ringSpeed = 400f;
+    private float ringSpeed = 1000f;
     private boolean ringStarted;
     private boolean ringDone;
     private float ringRadius = 0f;
@@ -57,7 +57,9 @@ public class Powerup extends Entity {
         if (ringStarted) {
             ringRadius += ringSpeed * delta_time;
 
-            if (ringRadius > 1440) {
+            BulletManager.instance.delteBulletsFromPositionWithRadius(x, y, ringRadius / 2);
+
+            if (ringRadius > 2880) {
                 ringDone = true;
                 toRemove = true;
             }
@@ -70,7 +72,8 @@ public class Powerup extends Entity {
         if (ringStarted) {
             g2d.setColor(Color.GREEN);
             g2d.setStroke(new BasicStroke(10f));
-            g2d.drawOval((int)(x - ringRadius / 2), (int)(y - ringRadius / 2), (int)ringRadius, (int)ringRadius);
+            g2d.drawOval((int)((x - ringRadius / 2) * TopdownShooter.instance.scaleX), (int)((y - ringRadius / 2) * TopdownShooter.instance.scaleY),
+                         (int)(ringRadius * TopdownShooter.instance.scaleX), (int)(ringRadius * TopdownShooter.instance.scaleY));
         } else {
             g2d.drawImage(image, (int)((x - 32) * TopdownShooter.instance.scaleX), (int)((y - 32) * TopdownShooter.instance.scaleY),
                     (int)(56 * TopdownShooter.instance.scaleX), (int)(56 * TopdownShooter.instance.scaleY), null);
@@ -84,12 +87,11 @@ public class Powerup extends Entity {
             Player.instance.pickedupPowerup = true;
             Player.instance.powerupPickedupId = id;
             return true;
-        } else if ("clear_bullets".equals(typeOfPowerup)) {
+        } else if ("clear_bullets".equals(typeOfPowerup) && !ringDone) {
             toRemove = false;
             ringStarted = true;
             return false;
         } else if (ringStarted && ringDone) {
-            System.out.println("Removed");
             return true;
         }
         return true;

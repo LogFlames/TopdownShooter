@@ -13,8 +13,8 @@ import java.awt.geom.Ellipse2D;
 
 public class Bullet {
 
-    private float x;
-    private float y;
+    public float x;
+    public float y;
     private float rotation;
     private float speed = 750f;
 

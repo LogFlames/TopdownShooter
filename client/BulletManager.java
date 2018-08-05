@@ -49,4 +49,16 @@ public class BulletManager {
     public void addBullet(Bullet bullet) {
         bullets.add(bullet);
     }
+
+    public void delteBulletsFromPositionWithRadius(float x, float y, float rad) {
+        Iterator<Bullet> iter = bullets.iterator();
+
+        while (iter.hasNext()) {
+            Bullet b = iter.next();
+
+            if (Math.hypot(b.x - x, b.y - y) < rad) {
+                iter.remove();
+            }
+        }
+    }
 }
