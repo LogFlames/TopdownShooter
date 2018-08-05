@@ -180,6 +180,7 @@ public class Client {
         int pos_x = 0;
         int pos_y = 0;
         int id = 0;
+        String type = "ammo";
         for (String part : parts) {
             String[] attrs = part.split(":");
             String attribute = attrs[0];
@@ -194,12 +195,15 @@ public class Client {
                 case "pos_y":
                     pos_y = (int)(PositionData.tryParseFloat(value) * 900);
                     break;
+                case "type":
+                    type = value;
+                    break;
                 default:
                     System.out.println("No way to parse: " + part + " in powerup update from server.");
                     break;
             }
         }
-        EntityManager.instance.addEntity(id, new Powerup(pos_x, pos_y, id));
+        EntityManager.instance.addEntity(id, new Powerup(pos_x, pos_y, id, type));
     }
 
     public void pickupPowerup(PositionData data) {

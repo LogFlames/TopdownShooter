@@ -24,7 +24,9 @@ public class EntityManager {
     public void draw(Graphics g) {
         if (entities != null && entities.size() > 0) {
             for (Entity e : entities.values()) {
-                e.draw(g);
+                if (e != null) {
+                    e.draw(g);
+                }
             }
         }
         if (player != null) {
@@ -44,7 +46,11 @@ public class EntityManager {
             HashMap.Entry<Integer, Entity> e = (HashMap.Entry<Integer, Entity>)iter.next();
 
             if (e.getValue().toRemove) {
-                iter.remove();
+                if (e.getValue().onDeath()) {
+                    iter.remove();
+                } else {
+                    e.getValue().toRemove = false;
+                }
             }
         }
     }

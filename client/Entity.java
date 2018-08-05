@@ -18,6 +18,10 @@ public abstract class Entity {
     protected abstract void draw(Graphics g);
     protected abstract void update(float delta_time);
 
+    public boolean onDeath() {
+        return true;
+    }
+
     public boolean toRemove;
 
     public void setNewData(PositionData data) {
