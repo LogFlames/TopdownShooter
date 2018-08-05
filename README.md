@@ -13,7 +13,7 @@ This is not properly supported at the moment, but it is still possible at the mo
 4. Run the `server/server.py` file with Python 2.7
 5. Start the java client via `java Topdownshooter` from the `client` folder
 ## Requirements
-To run the game, you will need to have [Java](https://java.com/en/download/) installed on your computer. If you're not sure wether or not you have Java installed, try typing `java` in a console window and see if it gives you an error. On the other hand, running the server requires Python 2.7. Try typing `python2` in your console and see if you get an error. If you do, Python can be download [here](https://www.python.org/downloads/).
+In order to run the game, you will need to have [Java](https://java.com/en/download/) installed on your computer. If you're not sure wether or not you have Java installed, try typing `java` in a console window and see if it gives you an error. On the other hand, running the server requires Python 2.7. Try typing `python2` in your console and see if you get an error. If you do, Python can be download [here](https://www.python.org/downloads/).
 ## Known bugs
 * Server cannot run in Python 3 (Issue [#1](https://github.com/LogFlames/TopdownShooter/issues/1))
 * Server is unprotected from invalid data (Issue [#2](https://github.com/LogFlames/TopdownShooter/issues/2))
