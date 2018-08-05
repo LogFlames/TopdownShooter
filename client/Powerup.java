@@ -88,12 +88,12 @@ public class Powerup extends Entity {
             Player.instance.powerupPickedupId = id;
             return true;
         } else if ("clear_bullets".equals(typeOfPowerup) && !ringDone) {
+            Player.instance.pickedupPowerup = true;
+            Player.instance.powerupPickedupId = id;
             toRemove = false;
             ringStarted = true;
             return false;
         } else if (ringStarted && ringDone) {
-            Player.instance.pickedupPowerup = true;
-            Player.instance.powerupPickedupId = id;
             return true;
         }
         return true;
