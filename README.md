@@ -14,3 +14,7 @@ This is not properly supported at the moment, but it is still possible at the mo
 ## Known bugs
 * Server cannot run in Python 3 (Issue [#1](https://github.com/LogFlames/TopdownShooter/issues/1))
 * Server is unprotected from invalid data (Issue [#2](https://github.com/LogFlames/TopdownShooter/issues/2))
+## Contact
+* [Website](https://troff.xyz)
+* [troffaholic@gmail.com](mailto:troffaholic@gmail.com)
+* Discord: troffaholic#1066
