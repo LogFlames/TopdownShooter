@@ -195,7 +195,7 @@ public class Client {
                 case "pos_y":
                     pos_y = (int)(PositionData.tryParseFloat(value) * 900);
                     break;
-                case "type":
+                case "pow_type":
                     type = value;
                     break;
                 default:
