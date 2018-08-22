@@ -17,7 +17,8 @@ def getIp():
 	s.connect(('8.8.8.8', 80))
 	return s.getsockname()[0]
 
-host = getIp()
+#host = getIp()
+host = "localhost"
 
 for port in range(1024, 1049):
 	try:

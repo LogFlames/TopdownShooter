@@ -22,7 +22,8 @@ public class EntityManager {
     }
 
     public void draw(Graphics g) {
-        if (entities != null && entities.size() > 0 && entities.values() != null && entities.values().size() > 0) {
+/*
+        if (entities != null) {
             for (Entity e : entities.values()) {
                 if (e != null) {
                     try {
@@ -33,6 +34,15 @@ public class EntityManager {
                 }
             }
         }
+*/
+
+        Iterator<HashMap.Entry<Integer, Entity>> iter = entities.entrySet().iterator();
+
+        while (iter.hasNext()) {
+            HashMap.Entry<Integer, Entity> e = (HashMap.Entry<Integer, Entity>)iter.next();
+            e.getValue().draw(g);
+        }
+
         if (player != null) {
             player.draw(g);
         }
