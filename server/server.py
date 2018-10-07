@@ -1,6 +1,4 @@
 
-# -*- coding: utf-8 -*-
-
 import socket, sys, select, time, random
 
 from serverUtilities import *
@@ -30,10 +28,11 @@ for port in range(1024, 1049):
 	if not port:
 		print('Found no available port on {} host. Exiting.'.format(host))
 
-# We should have a good way to keep track of active connections
+# We should have a good way to keep track of active connections
 
 connections = []
 clientID = 0
+itemIndex = 0
 
 powerUp = False
 
@@ -107,7 +106,8 @@ while True:
 		last_hearbeat = time.time()
 	
 	if random.random() > 0.995 and connections:
-		powerType = random.choice(['ammo', 'clear_bullets', 'health_kit'])
+		powerType = ['ammo', 'clear_bullets', 'health_kit'][itemIndex]
+		itemIndex = (itemIndex + 1) % 3
 		clientID += 1
 		powerUp = 'PUidentifier:{};pos_x:{};pos_y:{};pow_type:{}#'.format(clientID, random.random(), random.random(), powerType)
 		for c in connections:
