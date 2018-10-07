@@ -20,9 +20,11 @@ public class Client {
         while (socket == null) {
             port++;
             try {
+                socket = new Socket("192.168.171.91", port);
+                //socket = new Socket("172.16.1.140", port);
                 //socket = new Socket("172.16.1.140", port);
                 //socket = new Socket("94.245.5.48", 8192);
-                socket = new Socket("10.33.19.243", port);
+                //socket = new Socket("10.33.19.243", port);
                 //socket = new Socket("localhost", port);
             } catch (IOException e) {
                 e.printStackTrace();
